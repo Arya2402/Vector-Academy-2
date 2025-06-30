@@ -33,7 +33,23 @@ const Imp = () => {
   }, [isPaused]);
 
   return (
-    <div className="w-[85%] sm:w-[90%] md:w-[70%] aspect-[3/1.5] mx-auto mt-8 mb-10 relative overflow-hidden rounded-lg shadow-lg">
+    <div
+  className="
+    w-72         /* default: 18rem ~ small screens */
+    sm:w-100     /* small: 24rem */
+    md:w-150 /* medium: 32rem */
+    lg:w-[44rem] /* large and above: ~ stays same */
+    aspect-[3/1.5]
+    mx-auto
+    mt-8
+    mb-10
+    relative
+    overflow-hidden
+    rounded-xl
+    shadow-[0_4px_20px_rgba(0,0,0,0.5)]
+    transition-all duration-500
+  "
+>
       <img
         src={images[index]}
         alt={`Slide ${index + 1}`}

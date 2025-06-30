@@ -1,16 +1,16 @@
-import { Roboto } from "next/font/google";  // Importing Roboto font
-import Header from "./components/Header";   // Import Header component
-import Footer from "./components/Footer";   // Import Footer component
-import Call from "./components/Call";       // Import Call component
-import "./globals.css";                    // Global CSS
+import { Poppins } from "next/font/google";  // Changed from Roboto to Poppins
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Call from "./components/Call";
+import "./globals.css";
 
-// Applying the Roboto font with a custom CSS variable
-const roboto = Roboto({
-  variable: "--font-roboto", // Customize the CSS variable name
-  subsets: ["latin"],        // Include Latin subset
+// Apply the Poppins font and define a CSS variable
+const poppins = Poppins({
+  variable: "--font-roboto",  // Keep this variable name if used in CSS
+  subsets: ["latin"],
+  weight: ["400", "700"],     // You can customize weights as needed
 });
 
-// Metadata for the layout (used for SEO)
 export const metadata = {
   title: "Vector Academy",
   description: "Your path to academic excellence.",
@@ -19,20 +19,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${roboto.variable} antialiased`}>
-        {/* Call Section (Always visible, above the header) */}
-        <Call />
-
-        {/* Common Header for all pages (with margin-top to avoid overlap with Call) */}
+      <body className={`${poppins.variable} antialiased`}>
         <Header />
-        
-        {/* The content of the specific page will be rendered here */}
         <main>{children}</main>
-        
-        {/* Common Footer for all pages */}
         <Footer />
       </body>
     </html>
   );
 }
-

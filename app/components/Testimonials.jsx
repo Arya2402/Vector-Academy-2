@@ -5,89 +5,98 @@ import { useEffect, useRef } from "react";
 const testimonials = [
   {
     image: "/images/1p.png",
-    text: "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     name: "Vinayak",
     position: "Vector Student",
   },
   {
     image: "/images/2p.png",
-    text: "lorem1 ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     name: "Srikari",
     position: "Vector Student",
   },
   {
     image: "/images/3p.png",
-    text: "korem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     name: "Srikari",
     position: "Vector Student",
   },
   {
     image: "/images/4p.png",
-    text: "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     name: "Vinayak Joshi",
     position: "Vector Student",
   },
   {
     image: "/images/5p.png",
-    text: "lorem10 ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor ",
+    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.",
     name: "Srikari",
     position: "Vector Student",
   },
   {
     image: "/images/6p.png",
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut ",
+    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt.",
     name: "David Kim",
     position: "Vector Student",
   },
 ];
 
-export default function TestimonialSlider() {
-  const testimonialsRef = useRef(null);
+export default function Testimonials() {
+  const scrollRef = useRef(null);
+  const isHovered = useRef(false);
 
   useEffect(() => {
-    const scrollContainer = testimonialsRef.current;
+    const container = scrollRef.current;
 
     const scroll = () => {
-      if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth / 2) {
-        scrollContainer.scrollLeft = 0;
-      } else {
-        scrollContainer.scrollLeft += 1;
+      if (!isHovered.current && container) {
+        container.scrollLeft += 0.5;
+
+        // Reset scroll if halfway through (for looping effect)
+        if (container.scrollLeft >= container.scrollWidth / 2) {
+          container.scrollLeft = 0;
+        }
       }
+
+      requestAnimationFrame(scroll);
     };
 
-    const interval = setInterval(scroll, 20);
-    return () => clearInterval(interval);
+    scroll();
   }, []);
 
   return (
-    <section className="bg-white py-12 px-4">
-      <div className="max-w-6xl mx-auto">
-        <h2 className="text-3xl font-bold text-center mb-10 text-gray-800">
-          What Our Members Say
-        </h2>
+    <section className="py-12">
+      <h2 className="text-2xl font-bold mb-4 text-gray-800 text-center">Testimonials</h2>
+      <p className="text-gray-600 text-center max-w-3xl mx-auto mb-10">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a metus vel sapien bibendum convallis in non quam.
+      </p>
+
+      <div
+        className="overflow-hidden"
+        onMouseEnter={() => (isHovered.current = true)}
+        onMouseLeave={() => (isHovered.current = false)}
+      >
         <div
-          ref={testimonialsRef}
-          className="flex overflow-x-auto space-x-6 scrollbar-hide"
+          ref={scrollRef}
+          className="flex gap-6 overflow-x-auto scrollbar-hide py-4 px-4"
         >
-          {[...testimonials, ...testimonials].map((testimonial, index) => (
+          {[...testimonials, ...testimonials].map((item, index) => (
             <div
               key={index}
-              className="flex-shrink-0 w-72 h-80 transition-transform duration-500 hover:scale-105"
+              className="flex-shrink-0 w-[90%] sm:w-80 bg-white rounded-xl shadow-xl p-6 transition-transform duration-300 hover:scale-105"
             >
-              <figure className="p-4 text-center bg-white rounded-2xl shadow-lg ring-1 ring-blue-100 drop-shadow-xl hover:drop-shadow-[0_10px_20px_rgba(173,216,230,0.5)]">
+              <div className="flex flex-col items-center text-center">
                 <img
-                  src={testimonial.image}
-                  alt={testimonial.name}
-                  className="w-24 h-24 object-cover mx-auto mb-4 rounded-full border-4 border-blue-200 shadow-md"
+                  src={item.image}
+                  alt={item.name}
+                  className="w-32 h-32 rounded-full object-cover shadow-lg mb-4"
                 />
-                <blockquote className="italic text-gray-700 mb-3 h-24 overflow-hidden">
-                  "{testimonial.text}"
-                </blockquote>
-                <figcaption>
-                  <p className="font-semibold text-gray-900">{testimonial.name}</p>
-                  <p className="text-sm text-gray-500">{testimonial.position}</p>
-                </figcaption>
-              </figure>
+                <p className="text-gray-600 text-base italic mb-4 w-full">
+                  {item.text}
+                </p>
+                <h4 className="text-lg font-semibold text-gray-900">{item.name}</h4>
+                <span className="text-sm text-gray-500">{item.position}</span>
+              </div>
             </div>
           ))}
         </div>

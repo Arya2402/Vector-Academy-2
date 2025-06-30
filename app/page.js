@@ -7,17 +7,18 @@ import CTA from "./components/CTA";
 import Call from "./components/Call";
 import Testimonials from "./components/Testimonials";
 import Imp from "./components/Imp";
+import Chome from "./components/Chome";
+import FAQs from "./components/FAQs";
 
 export default function Home() {
   return (
     <div>
-      <Call/>
       <Hero/>
       <Scroll/>
-      <Imp/>
-      <Stats/>
       <CTA/>
+      <Stats/>
       <Testimonials/>
+      <FAQs/>
 
     </div>
   );

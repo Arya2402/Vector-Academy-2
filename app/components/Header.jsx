@@ -1,135 +1,180 @@
 "use client";
 
-import React, { useState } from "react";
-import Link from "next/link";
+import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 
-const Header = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+export default function VectorAcademyHeader() {
+  const pathname = usePathname();
 
-  const toggleMenu = () => setIsOpen(!isOpen);
-  const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
+  const [isMobileOpen, setMobileOpen] = useState(false);
+  const [isCoursesOpen, setCoursesOpen] = useState(false);
+
+  useEffect(() => {
+    function handleResize() {
+      if (window.innerWidth >= 1024) {
+        setMobileOpen(false);
+        setCoursesOpen(false);
+      }
+    }
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const isActive = (path) => pathname === path;
 
   return (
-    <header className="bg-white shadow-md fixed top-10 left-0 right-0 z-40">
-      {/* Top Navigation for Large Devices */}
-      <div className="hidden lg:flex justify-between items-center px-4 py-3">
-        <div className="text-xl font-bold text-blue-600">Vector Academy</div>
-        <nav className="space-x-4 flex items-center">
-          <Link href="/about" className="text-gray-700 hover:text-blue-700">
-            About
-          </Link>
+    <>
+      <style>{`
+        @keyframes dropdownFadeSlide {
+          0% {
+            opacity: 0;
+            transform: translateY(-10px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        .dropdown-animate {
+          animation: dropdownFadeSlide 0.3s ease forwards;
+        }
+      `}</style>
 
-          {/* Dropdown for Courses */}
-          <div className="relative">
+      <header
+        className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-[92%] max-w-6xl bg-white border border-gray-200 rounded-3xl px-6 py-4 flex items-center justify-between transition-all duration-300"
+        style={{ boxShadow: "rgba(17, 12, 46, 0.15) 0px 48px 100px 0px" }}
+      >
+        <div className="text-[22px] font-bold tracking-wide" style={{ color: "#6895D2" }}>
+          Vector Academy
+        </div>
+
+        <nav className="hidden lg:flex gap-6 text-gray-700 font-medium items-center">
+          <a
+            href="/"
+            className={`pb-1 transition ${isActive("/") ? "text-blue-600 border-b-2 border-blue-600" : "hover:text-blue-500"}`}
+            aria-current={isActive("/") ? "page" : undefined}
+          >
+            Home
+          </a>
+
+          <a
+            href="/about"
+            className={`pb-1 transition ${isActive("/about") ? "text-blue-600 border-b-2 border-blue-600" : "hover:text-blue-500"}`}
+          >
+            About
+          </a>
+
+          <div className="relative group inline-block">
             <button
-              onClick={toggleDropdown}
-              type="button"
-              className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-blue-700"
+              className={`pb-1 transition ${pathname.startsWith("/courses") ? "text-blue-600 border-b-2 border-blue-600" : "hover:text-blue-500"}`}
+              aria-haspopup="true"
+              aria-expanded="false"
             >
               Courses
             </button>
 
-            {dropdownOpen && (
-              <div className="absolute top-10 w-56 rounded-md border bg-white shadow-lg z-50">
-                <Link
-                  href="/courses/jee"
-                  className="block px-4 py-2 text-sm hover:bg-gray-100"
-                >
-                  JEE
-                </Link>
-                <Link
-                  href="/courses/neet"
-                  className="block px-4 py-2 text-sm hover:bg-gray-100"
-                >
-                  NEET
-                </Link>
-                <Link
-                  href="/courses/eapcet"
-                  className="block px-4 py-2 text-sm hover:bg-gray-100"
-                >
-                  EAPCET
-                </Link>
-              </div>
-            )}
+            <div className="absolute top-full mt-2 left-0 bg-white border border-gray-200 rounded-xl p-3 shadow-md opacity-0 invisible group-hover:opacity-100 group-hover:visible dropdown-animate w-36 transition-all duration-200 z-50">
+              <a
+                href="/courses/jee"
+                className={`block px-2 py-2 transition ${isActive("/courses/jee") ? "text-blue-600" : "text-gray-700 hover:text-blue-500"} border-b border-gray-100`}
+              >
+                JEE
+              </a>
+              <a
+                href="/courses/neet"
+                className={`block px-2 py-2 transition ${isActive("/courses/neet") ? "text-blue-600" : "text-gray-700 hover:text-blue-500"} border-b border-gray-100`}
+              >
+                NEET
+              </a>
+              <a
+                href="/courses/eapcet"
+                className={`block px-2 py-2 transition ${isActive("/courses/eapcet") ? "text-blue-600" : "text-gray-700 hover:text-blue-500"}`}
+              >
+                EAPCET
+              </a>
+            </div>
           </div>
 
-          <Link href="/admissions" className="text-gray-700 hover:text-blue-700">
-            Admissions
-          </Link>
-          <Link href="/hostel" className="text-gray-700 hover:text-blue-700">
-            Hostel
-          </Link>
-          <Link href="/contact" className="text-gray-700 hover:text-blue-700">
-            Contact
-          </Link>
-        </nav>
-      </div>
-
-      {/* Mobile Navbar */}
-      <div className="lg:hidden flex justify-between items-center px-4 py-2">
-        <div className="text-xl font-bold text-blue-600">Vector Academy</div>
-        <button onClick={toggleMenu} className="text-gray-700">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2}
+          <a
+            href="/contact"
+            className={`pb-1 transition ${isActive("/contact") ? "text-blue-600 border-b-2 border-blue-600" : "hover:text-blue-500"}`}
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M4 6h16M4 12h16M4 18h16"
-            />
+            Contact
+          </a>
+        </nav>
+
+        <button
+          className="lg:hidden"
+          onClick={() => setMobileOpen(!isMobileOpen)}
+          aria-label="Toggle Menu"
+          aria-expanded={isMobileOpen}
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="#333" viewBox="0 0 24 24">
+            <path d="M2 5h20v2H2V5zm0 6h20v2H2v-2zm0 6h20v2H2v-2z" />
           </svg>
         </button>
-      </div>
 
-      {/* Sidebar Navigation for Mobile */}
-      <div className={`${isOpen ? "block" : "hidden"} lg:hidden bg-white px-4 pb-4`}>
-        <nav className="space-y-2">
-          <Link href="/about" className="block py-2 border-b border-gray-200">
-            About
-          </Link>
-
-          {/* Dropdown Courses */}
-          <div>
-            <button
-              onClick={toggleDropdown}
-              className="block w-full text-left py-2 text-gray-700 font-medium"
+        {isMobileOpen && (
+          <div
+            className="absolute top-full mt-3 right-6 w-60 bg-white border border-gray-200 rounded-xl p-4 flex flex-col gap-3 lg:hidden shadow-md dropdown-animate"
+            role="menu"
+          >
+            <a
+              href="/"
+              className={`pb-1 transition ${isActive("/") ? "text-blue-600 border-b-2 border-blue-600" : "text-gray-700 hover:text-blue-500"}`}
+              aria-current={isActive("/") ? "page" : undefined}
             >
-              Courses
-            </button>
-            {dropdownOpen && (
-              <div className="ml-4 space-y-2">
-                <Link href="/courses/jee" className="block py-1 text-sm text-gray-600">
-                  JEE
-                </Link>
-                <Link href="/courses/neet" className="block py-1 text-sm text-gray-600">
-                  NEET
-                </Link>
-                <Link href="/courses/eapcet" className="block py-1 text-sm text-gray-600">
-                  EAPCET
-                </Link>
-              </div>
-            )}
+              Home
+            </a>
+            <a
+              href="/about"
+              className={`transition ${isActive("/about") ? "text-blue-600 border-b-2 border-blue-600" : "text-gray-700 hover:text-blue-500"}`}
+            >
+              About
+            </a>
+
+            <div>
+              <button
+                onClick={() => setCoursesOpen(!isCoursesOpen)}
+                className={`w-full text-left transition ${pathname.startsWith("/courses") ? "text-blue-600" : "text-gray-700 hover:text-blue-500"}`}
+                aria-haspopup="true"
+                aria-expanded={isCoursesOpen}
+              >
+                Courses
+              </button>
+              {isCoursesOpen && (
+                <div className="ml-4 mt-2 flex flex-col gap-1">
+                  <a
+                    href="/courses/jee"
+                    className={`transition ${isActive("/courses/jee") ? "text-blue-600" : "text-gray-700 hover:text-blue-500"}`}
+                  >
+                    JEE
+                  </a>
+                  <a
+                    href="/courses/neet"
+                    className={`transition ${isActive("/courses/neet") ? "text-blue-600" : "text-gray-700 hover:text-blue-500"}`}
+                  >
+                    NEET
+                  </a>
+                  <a
+                    href="/courses/eapcet"
+                    className={`transition ${isActive("/courses/eapcet") ? "text-blue-600" : "text-gray-700 hover:text-blue-500"}`}
+                  >
+                    EAPCET
+                  </a>
+                </div>
+              )}
+            </div>
+
+            <a
+              href="/contact"
+              className={`transition ${isActive("/contact") ? "text-blue-600 border-b-2 border-blue-600" : "text-gray-700 hover:text-blue-500"}`}
+            >
+              Contact
+            </a>
           </div>
-
-          <Link href="/admissions" className="block py-2 border-b border-gray-200">
-            Admissions
-          </Link>
-          <Link href="/hostel" className="block py-2 border-b border-gray-200">
-            Hostel
-          </Link>
-          <Link href="/contact" className="block py-2 border-b border-gray-200">
-            Contact
-          </Link>
-        </nav>
-      </div>
-    </header>
+        )}
+      </header>
+    </>
   );
-};
-
-export default Header;
+}

@@ -1,83 +1,95 @@
-'use client';
+"use client";
 
-import React from 'react';
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
 const CTA = () => {
-  const messages = [
-    {
-      id: 1,
-      name: 'Chairman',
-      message: `"We don’t just teach subjects—we prepare young minds for challenges and excellence."`,
-    },
-    {
-      id: 2,
-      name: 'Chairman',
-      message: `"Discipline, focus, and the right guidance create miracles. Let us help your child shine."`,
-    },
-    {
-      id: 3,
-      name: 'Chairman',
-      message: `"Parents, your trust is our responsibility. We nurture brilliance with care and commitment."`,
-    },
-  ];
-
   return (
-    <section className="bg-[#F3F8FF] px-4 sm:px-6 py-6 sm:py-8 mt-6 mb-8 rounded-lg font-poppins">
+    <section className="py-12">
+      <h2 className="text-2xl font-bold mb-4 text-gray-800 text-center">We Provide</h2>
+      <p className="text-gray-600 text-center max-w-3xl mx-auto mb-10">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a metus vel sapien bibendum convallis in non quam.
+      </p>
 
-      {/* Small & Medium Devices Only */}
-      <div className="block lg:hidden">
-        <h2 className="text-2xl font-semibold text-gray-800 mb-4 text-center">
-          Chairman's Message
-        </h2>
-
-        <div className="overflow-x-auto flex gap-4 pb-4 -mx-2 px-2">
-          {messages.map((msg) => (
-            <div
-              key={msg.id}
-              className="min-w-[320px] max-w-[90%] bg-white border border-gray-200 rounded-xl shadow-sm p-6 transition-transform hover:scale-105"
-            >
-              <div className="flex items-center gap-4 mb-4">
-                <img
-                  alt="Chairman"
-                  src="/images/4.png"
-                  className="w-14 h-14 rounded-full object-cover"
-                />
-                <h3 className="text-md font-medium text-gray-900">{msg.name}</h3>
-              </div>
-              <p className="text-base text-gray-800">{msg.message}</p>
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-6xl mx-auto px-4">
+        {/* JEE */}
+        <Link href="/courses/jee">
+          <div className="cursor-pointer bg-gray-50 p-4 rounded-xl shadow-md hover:shadow-lg transition flex items-center justify-between h-48">
+            <div className="flex flex-col justify-between h-full">
+              <h3 className="text-2xl font-semibold text-gray-800">JEE</h3>
+              <p className="text-sm text-gray-600 mt-2">
+                Prepare for the Joint Entrance Exam with our comprehensive materials and expert guidance.
+              </p>
+              <p
+                className="text-sm font-bold flex items-center justify-end gap-1 mt-auto text-right"
+                style={{ color: "#1f7fff" }}
+              >
+                View JEE Course <ArrowRight size={18} />
+              </p>
             </div>
-          ))}
-        </div>
-      </div>
+            <Image
+              src="/images/jee.png"
+              alt="JEE Course"
+              width={120}
+              height={120}
+              className="object-contain ml-4"
+            />
+          </div>
+        </Link>
 
-      {/* Large and Above Devices Only */}
-      <div className="hidden lg:grid lg:grid-cols-2 lg:items-center gap-8 mt-8">
-        <div className="text-left max-w-lg">
-          <h2 className="text-4xl font-semibold text-gray-800 mb-6">
-            Empower Your Child’s Future with Expert Guidance
-          </h2>
-          <p className="text-gray-700 mb-6 text-lg">
-            At our academy, we provide a growth-oriented and result-driven environment specifically designed to help students excel in JEE and NEET.
-          </p>
-          <p className="text-gray-700 mb-6 text-lg">
-            Our experienced faculty offer personalized coaching, ensuring each student is equipped with tools and confidence to succeed in competitive exams and beyond.
-          </p>
-          <p className="text-gray-700 mb-6 text-lg">
-            Focused on both academic excellence and holistic development, we help your child build strong problem-solving skills, critical thinking, and discipline—key to success at IITs and medical colleges.
-          </p>
-        </div>
+        {/* NEET */}
+        <Link href="/courses/neet">
+          <div className="cursor-pointer bg-gray-50 p-4 rounded-xl shadow-md hover:shadow-lg transition flex items-center justify-between h-48">
+            <div className="flex flex-col justify-between h-full">
+              <h3 className="text-2xl font-semibold text-gray-800">NEET</h3>
+              <p className="text-sm text-gray-600 mt-2">
+                Ace the National Eligibility cum Entrance Test with our targeted preparation strategies.
+              </p>
+              <p
+                className="text-sm font-bold flex items-center justify-end gap-1 mt-auto text-right"
+                style={{ color: "#1f7fff" }}
+              >
+                View NEET Course <ArrowRight size={18} />
+              </p>
+            </div>
+            <Image
+              src="/images/neet.png"
+              alt="NEET Course"
+              width={120}
+              height={120}
+              className="object-contain ml-4"
+            />
+          </div>
+        </Link>
 
-        <div>
-          <img
-            src="/images/4.png"
-            alt="Campus"
-            className="w-full h-80 object-cover rounded-lg transition-transform hover:scale-105"
-          />
-        </div>
+        {/* EAPCET */}
+        <Link href="/courses/eapcet">
+          <div className="cursor-pointer bg-gray-50 p-4 rounded-xl shadow-md hover:shadow-lg transition flex items-center justify-between h-48">
+            <div className="flex flex-col justify-between h-full">
+              <h3 className="text-2xl font-semibold text-gray-800">EAPCET</h3>
+              <p className="text-sm text-gray-600 mt-2">
+                Master the Engineering, Agriculture & Pharmacy Common Entrance Test with our tailored courses.
+              </p>
+              <p
+                className="text-sm font-bold flex items-center justify-end gap-1 mt-auto text-right"
+                style={{ color: "#1f7fff" }}
+              >
+                View EAPCET Course <ArrowRight size={18} />
+              </p>
+            </div>
+            <Image
+              src="/images/eapcet.png"
+              alt="EAPCET Course"
+              width={120}
+              height={120}
+              className="object-contain ml-4"
+            />
+          </div>
+        </Link>
       </div>
     </section>
   );
 };
 
 export default CTA;
-

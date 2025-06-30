@@ -1,6 +1,7 @@
-"use client"; // Ensure it's a client-side component
+"use client";
 
 import { useState, useEffect } from "react";
+import { Trophy, Medal, Hourglass } from "lucide-react";
 
 const Stats = () => {
   const [students, setStudents] = useState(0);
@@ -12,7 +13,7 @@ const Stats = () => {
       let count = 0;
       const interval = setInterval(() => {
         if (count < target) {
-          count += Math.ceil(target / 100); // Increment fast but controlled
+          count += Math.ceil(target / 100);
           setState(count);
         } else {
           clearInterval(interval);
@@ -26,89 +27,63 @@ const Stats = () => {
   }, []);
 
   return (
-    <div className="py-16" style={{ backgroundColor: "#FFFFFF" }}> {/* Increased top and bottom padding, white background */}
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 justify-center"> {/* Increased gap */}
-          {/* Students Stat */}
-          <div className="stat shadow-2xl rounded-lg bg-white p-6 text-center transition-all duration-300 mx-4"> {/* Added horizontal margin */}
-            <div className="stat-figure text-blue-400">
-              {/* Students Icon */}
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="inline-block h-8 w-8 stroke-current"
-              >
-                <path d="M15 13a3 3 0 1 0-6 0" />
-                <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20" />
-                <circle cx="12" cy="8" r="2" />
-              </svg>
+    <div className="py-8 bg-white">
+      <div className="max-w-5xl mx-auto px-4 text-center">
+        <h2 className="text-2xl font-bold text-gray-800 sm:text-3xl mb-6">
+          Our Achievements
+        </h2>
+        <p className="text-sm text-gray-600 max-w-xl mx-auto mb-8">
+          Empowering success through quality education and expert mentorship.
+          Join thousands of students achieving their dreams.
+        </p>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* Enrolled Students */}
+          <div className="bg-[#F4F6FF] rounded-xl p-6 text-center shadow-md">
+            <div className="flex justify-center mb-2">
+              <Trophy size={32} className="text-indigo-500" />
             </div>
-            <div className="stat-title text-lg text-black">Enrolled Students</div>
-            <div className="stat-value text-4xl font-semibold text-black">{students}+</div>
-            <div className="stat-desc text-sm text-gray-500">Total students enrolled in the academy</div>
+            <div className="text-4xl font-bold text-gray-800 mb-2">
+              {students}+
+            </div>
+            <h3 className="text-lg font-semibold text-gray-700 mb-1">
+              Enrolled Students
+            </h3>
+            <p className="text-xs text-gray-600">
+              Thousands of students learning and growing with us.
+            </p>
           </div>
 
-          {/* Top Ranks Stat */}
-          <div className="stat shadow-2xl rounded-lg bg-white p-6 text-center transition-all duration-300 mx-4"> {/* Added horizontal margin */}
-            <div className="stat-figure text-yellow-400">
-              {/* Medal Icon */}
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="inline-block h-8 w-8 stroke-current"
-              >
-                <path d="M7.21 15 2.66 7.14a2 2 0 0 1 .13-2.2L4.4 2.8A2 2 0 0 1 6 2h12a2 2 0 0 1 1.6.8l1.6 2.14a2 2 0 0 1 .14 2.2L16.79 15" />
-                <path d="M11 12 5.12 2.2" />
-                <path d="m13 12 5.88-9.8" />
-                <path d="M8 7h8" />
-                <circle cx="12" cy="17" r="5" />
-                <path d="M12 18v-2h-.5" />
-              </svg>
+          {/* Top Ranks */}
+          <div className="bg-[#F4F6FF] rounded-xl p-6 text-center shadow-md">
+            <div className="flex justify-center mb-2">
+              <Medal size={32} className="text-yellow-500" />
             </div>
-            <div className="stat-title text-lg text-black">Top Ranks Achieved</div>
-            <div className="stat-value text-4xl font-semibold text-black">{ranks}+</div>
-            <div className="stat-desc text-sm text-gray-500">Top ranks in JEE/NEET exams</div>
+            <div className="text-4xl font-bold text-gray-800 mb-2">
+              {ranks}+
+            </div>
+            <h3 className="text-lg font-semibold text-gray-700 mb-1">
+              Top Ranks
+            </h3>
+            <p className="text-xs text-gray-600">
+              Consistently achieving the top positions in all exams from every stream.
+            </p>
           </div>
 
-          {/* Expert Sessions Stat */}
-          <div className="stat shadow-2xl rounded-lg bg-white p-6 text-center transition-all duration-300 mx-4"> {/* Added horizontal margin */}
-            <div className="stat-figure text-indigo-400">
-              {/* Hourglass Icon */}
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="inline-block h-8 w-8 stroke-current"
-              >
-                <path d="M5 22h14" />
-                <path d="M5 2h14" />
-                <path d="M17 22v-4.172a2 2 0 0 0-.586-1.414L12 12l-4.414 4.414A2 2 0 0 0 7 17.828V22" />
-                <path d="M7 2v4.172a2 2 0 0 0 .586 1.414L12 12l4.414-4.414A2 2 0 0 0 17 6.172V2" />
-              </svg>
+          {/* Expert Sessions */}
+          <div className="bg-[#F4F6FF] rounded-xl p-6 text-center shadow-md">
+            <div className="flex justify-center mb-2">
+              <Hourglass size={32} className="text-teal-500" />
             </div>
-            <div className="stat-title text-lg text-black">Expert Sessions Conducted</div>
-            <div className="stat-value text-4xl font-semibold text-black">{sessions}+</div>
-            <div className="stat-desc text-sm text-gray-500">Interactive sessions with industry experts</div>
+            <div className="text-4xl font-bold text-gray-800 mb-2">
+              {sessions}+
+            </div>
+            <h3 className="text-lg font-semibold text-gray-700 mb-1">
+              Expert Sessions
+            </h3>
+            <p className="text-xs text-gray-600">
+              Learn directly from our industry level leaders and experts.
+            </p>
           </div>
         </div>
       </div>
@@ -117,4 +92,3 @@ const Stats = () => {
 };
 
 export default Stats;
-

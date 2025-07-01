@@ -10,7 +10,7 @@ const poppins = Poppins({
   weight: ["400", "700"],
 });
 
-// Metadata for SEO and social media
+// Metadata for SEO and Social Sharing
 export const metadata = {
   title: "Vector Academy – Vector Junior College, Nizamabad",
   description:
@@ -39,14 +39,22 @@ export const metadata = {
     siteName: "Vector Academy",
     images: [
       {
-        url: "/android-chrome-512x512.png",
-        width: 512,
-        height: 512,
-        alt: "Vector Academy Logo",
+        url: "/images/og.png", // <- updated to actual OG image
+        width: 1200,
+        height: 630,
+        alt: "Vector Academy Open Graph Banner",
+        type: "image/png",
       },
     ],
     locale: "en_IN",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Vector Academy – Shape Your Future",
+    description:
+      "Join Vector Academy, the top junior college in Nizamabad for JEE, NEET, and EAPCET preparation.",
+    images: ["/images/og.png"],
   },
   icons: {
     icon: "/favicon.ico",
@@ -59,7 +67,6 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <head />
       <body className={`${poppins.variable} antialiased`}>
         <Header />
         <main>{children}</main>

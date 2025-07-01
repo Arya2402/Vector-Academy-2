@@ -40,39 +40,43 @@ export default function VectorAcademyHeader() {
       `}</style>
 
       <header
-        className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-[92%] max-w-6xl bg-white border border-gray-200 rounded-3xl px-6 py-4 flex items-center justify-between transition-all duration-300"
+        className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-[92%] max-w-6xl bg-white border border-gray-200 rounded-3xl px-6 py-3 flex items-center justify-between transition-all duration-300"
         style={{ boxShadow: "rgba(17, 12, 46, 0.15) 0px 48px 100px 0px" }}
       >
-        {/* LOGO clickable to Home */}
+        {/* Logo */}
         <a href="/" className="flex items-center gap-2">
           <img
             src="/images/LOGO.png"
-            alt="Vector Academy Logo"
-            className="h-10 w-auto object-contain"
+            alt="Vector Academy"
+            className="h-14 w-auto object-contain"
           />
           <span className="sr-only">Home</span>
         </a>
 
-        {/* Desktop Nav */}
+        {/* Desktop Navigation */}
         <nav className="hidden lg:flex gap-6 text-gray-700 font-medium items-center">
           <a
             href="/"
-            className={`pb-1 transition ${isActive("/") ? "text-blue-600 border-b-2 border-blue-600" : "hover:text-blue-500"}`}
+            className={`pb-1 transition ${
+              isActive("/") ? "text-blue-600 border-b-2 border-blue-600" : "hover:text-blue-500"
+            }`}
           >
             Home
           </a>
-
           <a
             href="/about"
-            className={`pb-1 transition ${isActive("/about") ? "text-blue-600 border-b-2 border-blue-600" : "hover:text-blue-500"}`}
+            className={`pb-1 transition ${
+              isActive("/about") ? "text-blue-600 border-b-2 border-blue-600" : "hover:text-blue-500"
+            }`}
           >
             About
           </a>
 
-          {/* Dropdown */}
           <div className="relative group inline-block">
             <button
-              className={`pb-1 transition ${pathname.startsWith("/courses") ? "text-blue-600 border-b-2 border-blue-600" : "hover:text-blue-500"}`}
+              className={`pb-1 transition ${
+                pathname.startsWith("/courses") ? "text-blue-600 border-b-2 border-blue-600" : "hover:text-blue-500"
+              }`}
             >
               Courses
             </button>
@@ -85,13 +89,15 @@ export default function VectorAcademyHeader() {
 
           <a
             href="/contact"
-            className={`pb-1 transition ${isActive("/contact") ? "text-blue-600 border-b-2 border-blue-600" : "hover:text-blue-500"}`}
+            className={`pb-1 transition ${
+              isActive("/contact") ? "text-blue-600 border-b-2 border-blue-600" : "hover:text-blue-500"
+            }`}
           >
             Contact
           </a>
         </nav>
 
-        {/* Hamburger Menu Button */}
+        {/* Mobile Hamburger */}
         <button
           className="lg:hidden"
           onClick={() => setMobileOpen(!isMobileOpen)}

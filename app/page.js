@@ -4,7 +4,6 @@ import Hero from "./components/Hero";
 import Scroll from "./components/Scroll";
 import Stats from "./components/Stats";
 import CTA from "./components/CTA";
-import Call from "./components/Call";
 import Testimonials from "./components/Testimonials";
 import Imp from "./components/Imp";
 import Chome from "./components/Chome";

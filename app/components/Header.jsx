@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 
 export default function VectorAcademyHeader() {
   const pathname = usePathname();
-
   const [isMobileOpen, setMobileOpen] = useState(false);
   const [isCoursesOpen, setCoursesOpen] = useState(false);
 
@@ -44,15 +43,21 @@ export default function VectorAcademyHeader() {
         className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-[92%] max-w-6xl bg-white border border-gray-200 rounded-3xl px-6 py-4 flex items-center justify-between transition-all duration-300"
         style={{ boxShadow: "rgba(17, 12, 46, 0.15) 0px 48px 100px 0px" }}
       >
-        <div className="text-[22px] font-bold tracking-wide" style={{ color: "#6895D2" }}>
-          Vector Academy
-        </div>
+        {/* LOGO clickable to Home */}
+        <a href="/" className="flex items-center gap-2">
+          <img
+            src="/images/LOGO.png"
+            alt="Vector Academy Logo"
+            className="h-10 w-auto object-contain"
+          />
+          <span className="sr-only">Home</span>
+        </a>
 
+        {/* Desktop Nav */}
         <nav className="hidden lg:flex gap-6 text-gray-700 font-medium items-center">
           <a
             href="/"
             className={`pb-1 transition ${isActive("/") ? "text-blue-600 border-b-2 border-blue-600" : "hover:text-blue-500"}`}
-            aria-current={isActive("/") ? "page" : undefined}
           >
             Home
           </a>
@@ -64,34 +69,17 @@ export default function VectorAcademyHeader() {
             About
           </a>
 
+          {/* Dropdown */}
           <div className="relative group inline-block">
             <button
               className={`pb-1 transition ${pathname.startsWith("/courses") ? "text-blue-600 border-b-2 border-blue-600" : "hover:text-blue-500"}`}
-              aria-haspopup="true"
-              aria-expanded="false"
             >
               Courses
             </button>
-
             <div className="absolute top-full mt-2 left-0 bg-white border border-gray-200 rounded-xl p-3 shadow-md opacity-0 invisible group-hover:opacity-100 group-hover:visible dropdown-animate w-36 transition-all duration-200 z-50">
-              <a
-                href="/courses/jee"
-                className={`block px-2 py-2 transition ${isActive("/courses/jee") ? "text-blue-600" : "text-gray-700 hover:text-blue-500"} border-b border-gray-100`}
-              >
-                JEE
-              </a>
-              <a
-                href="/courses/neet"
-                className={`block px-2 py-2 transition ${isActive("/courses/neet") ? "text-blue-600" : "text-gray-700 hover:text-blue-500"} border-b border-gray-100`}
-              >
-                NEET
-              </a>
-              <a
-                href="/courses/eapcet"
-                className={`block px-2 py-2 transition ${isActive("/courses/eapcet") ? "text-blue-600" : "text-gray-700 hover:text-blue-500"}`}
-              >
-                EAPCET
-              </a>
+              <a href="/courses/jee" className="block px-2 py-2 text-gray-700 hover:text-blue-500 border-b border-gray-100">JEE</a>
+              <a href="/courses/neet" className="block px-2 py-2 text-gray-700 hover:text-blue-500 border-b border-gray-100">NEET</a>
+              <a href="/courses/eapcet" className="block px-2 py-2 text-gray-700 hover:text-blue-500">EAPCET</a>
             </div>
           </div>
 
@@ -103,6 +91,7 @@ export default function VectorAcademyHeader() {
           </a>
         </nav>
 
+        {/* Hamburger Menu Button */}
         <button
           className="lg:hidden"
           onClick={() => setMobileOpen(!isMobileOpen)}
@@ -114,64 +103,29 @@ export default function VectorAcademyHeader() {
           </svg>
         </button>
 
+        {/* Mobile Menu */}
         {isMobileOpen && (
-          <div
-            className="absolute top-full mt-3 right-6 w-60 bg-white border border-gray-200 rounded-xl p-4 flex flex-col gap-3 lg:hidden shadow-md dropdown-animate"
-            role="menu"
-          >
-            <a
-              href="/"
-              className={`pb-1 transition ${isActive("/") ? "text-blue-600 border-b-2 border-blue-600" : "text-gray-700 hover:text-blue-500"}`}
-              aria-current={isActive("/") ? "page" : undefined}
-            >
-              Home
-            </a>
-            <a
-              href="/about"
-              className={`transition ${isActive("/about") ? "text-blue-600 border-b-2 border-blue-600" : "text-gray-700 hover:text-blue-500"}`}
-            >
-              About
-            </a>
+          <div className="absolute top-full mt-3 right-6 w-60 bg-white border border-gray-200 rounded-xl p-4 flex flex-col gap-3 lg:hidden shadow-md dropdown-animate">
+            <a href="/" className="text-gray-700 hover:text-blue-500">Home</a>
+            <a href="/about" className="text-gray-700 hover:text-blue-500">About</a>
 
             <div>
               <button
                 onClick={() => setCoursesOpen(!isCoursesOpen)}
-                className={`w-full text-left transition ${pathname.startsWith("/courses") ? "text-blue-600" : "text-gray-700 hover:text-blue-500"}`}
-                aria-haspopup="true"
-                aria-expanded={isCoursesOpen}
+                className="w-full text-left text-gray-700 hover:text-blue-500"
               >
                 Courses
               </button>
               {isCoursesOpen && (
                 <div className="ml-4 mt-2 flex flex-col gap-1">
-                  <a
-                    href="/courses/jee"
-                    className={`transition ${isActive("/courses/jee") ? "text-blue-600" : "text-gray-700 hover:text-blue-500"}`}
-                  >
-                    JEE
-                  </a>
-                  <a
-                    href="/courses/neet"
-                    className={`transition ${isActive("/courses/neet") ? "text-blue-600" : "text-gray-700 hover:text-blue-500"}`}
-                  >
-                    NEET
-                  </a>
-                  <a
-                    href="/courses/eapcet"
-                    className={`transition ${isActive("/courses/eapcet") ? "text-blue-600" : "text-gray-700 hover:text-blue-500"}`}
-                  >
-                    EAPCET
-                  </a>
+                  <a href="/courses/jee" className="text-gray-700 hover:text-blue-500">JEE</a>
+                  <a href="/courses/neet" className="text-gray-700 hover:text-blue-500">NEET</a>
+                  <a href="/courses/eapcet" className="text-gray-700 hover:text-blue-500">EAPCET</a>
                 </div>
               )}
             </div>
 
-            <a
-              href="/contact"
-              className={`transition ${isActive("/contact") ? "text-blue-600 border-b-2 border-blue-600" : "text-gray-700 hover:text-blue-500"}`}
-            >
-              Contact
-            </a>
+            <a href="/contact" className="text-gray-700 hover:text-blue-500">Contact</a>
           </div>
         )}
       </header>
